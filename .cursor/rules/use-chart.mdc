@@ -1,0 +1,9 @@
+---
+description: 当用户想要图例或者示意图时，遵循下面的规则
+globs: 
+alwaysApply: false
+---
+1. 调用 mcp_list_component 查看可用的组件，思考有什么组件可以用
+2. 调用 mcp_get_component_props 查看组件的参数
+3. 调用 mcp_generate_chart 生成图片，并保存到 public/images 目录下
+4. 在 markdown 合适的位置插入图片
