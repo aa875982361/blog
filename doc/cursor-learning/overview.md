@@ -8,7 +8,7 @@
 - UI 更新，将 Agent 作为默认界面
 - MCP 工具改进
 
-官网暂时没有提供下载，需要通过其他渠道下载，比如：
+官网课鞥没有提供 0.46 版本的下载，需要通过其他渠道下载，比如：
 windows: https://anysphere-binaries.s3.us-east-1.amazonaws.com/production/aff57e1d9a74ed627fb5bd393e347079514436a7/win32/x64/user-setup/CursorUserSetup-x64-0.46.0.exe
 mac(intel): https://anysphere-binaries.s3.us-east-1.amazonaws.com/production/aff57e1d9a74ed627fb5bd393e347079514436a7/darwin/x64/Cursor-darwin-x64.zip
 mac(apple): https://anysphere-binaries.s3.us-east-1.amazonaws.com/production/aff57e1d9a74ed627fb5bd393e347079514436a7/darwin/arm64/Cursor-darwin-arm64.zip
@@ -346,7 +346,9 @@ AI 就会主动去查找相关的组件，然后调用对应的工具来生成�
 
 ![image.png](../../public/images/cursor-learning/ai-collaboration-flow.png)
 
-这里由于时间原因，我不过多的介绍 MCP 工具，后续可能会单开一次分享来介绍，总的来说，MCP 工具是一个非常强大的工具，将很多繁琐的步骤集成到平时的日常工作中，并利用大模型来控制，比如我们可以通过 MCP 来和 Figma 文档协作，让 AI 根据 Figma 的文档来自动生成前端的业务组件。
+这里由于时间原因，我不过多的介绍 MCP 工具，后续可能会单开一次分享来介绍，总的来说，MCP 工具是一个非常强大的工具，将很多繁琐的步骤集成到平时的日常工作中，并利用大模型来控制比如:
+- 我们可以通过 MCP 来和 Figma 文档协作，让 AI 根据 Figma 的文档来自动生成前端的业务组件。
+- 我们可以通过 MCP 的 resources ，将企业内部的各种文档，比如组件库文档，产品文档，设计文档，技术文档等，集成到 AI 的上下文中，让 AI 根据这些文档来完成任务。
 
 这里就需要靠我们的想象力了。
 
@@ -354,12 +356,11 @@ AI 就会主动去查找相关的组件，然后调用对应的工具来生成�
 
 虽然我们已经完成了花店官网的初始化开发，但是如果仅仅如此，还完全打不到企业级应用的要求，我们还需要继续完善这个项目。
 
-比如我们需要让项目更加复杂一点，我们将花卉的数据配置继续拆分
+首先我们需要让项目更加复杂一点，我们将花卉的数据配置继续拆分
 
 ```
-将配置进行拆分，花的主要信息和花的详情展示按不同的花，单独放置，最后整合在一起
+将配置进行拆分，花的主要信息和花的详情展示按不同的花，单独放置，src/data/flowers/flowerBasics.ts 文件中放置主要信息，src/data/flowers/flowerDetails.ts 文件中放置详情信息，最后整合在一起
 ```
-
 
 这样，项目的复杂度稍微大了一点，在这种情况下，假如我们需要新增一种花，该怎么办？
 
@@ -376,6 +377,7 @@ AI 就会主动去查找相关的组件，然后调用对应的工具来生成�
 
 ## Project Rule
 
+### 用 Project Rule 定义工作流
 Project Rule 是 Cursor 提供的一种项目级别规范，比如定义项目中代码的规范，或者定义项目中的一些约定俗成的规范。
 
 但是不要被 Project Rule 的名称所迷惑，Project Rule 不仅仅局限于代码规范，还可以定义项目中的工作流。
@@ -421,3 +423,73 @@ Description:
 可以看到, AI 根据我的描述，识别到了我的意图，并根据 Project Rule 中对于新增花的意图的后续行为，自动执行了所有的步骤，这样，我们只需要提供一个工作流的模版，和对应的意图描述，AI 就可以自动执行所有的步骤，大大提高了效率。
 
 ![image.png](../../public/images/cursor-learning/project-rule-workflow.png)
+
+> 虽然不指定工作流时 Agent 也能自动查找相关文件进行修改，但不同编辑器对项目上下文的处理机制存在差异（例如 WindSurf 具备更优秀的上下文理解能力）。这种依赖编辑器工程化处理能力的方式存在不稳定性，因此建议通过明确的工作流规范来约束 AI 行为。这种主动定义工作流的方式不仅能提升任务执行的准确性，也更符合企业级开发的规范化要求。
+
+> 另一方面来说，定义工作流不仅仅能提升任务执行的准确性，也能让新加入的成员快速上手，因为工作流是写在项目中的，所以新成员只需要查看工作流，就能快速上手。而减少在开发过程中理解不同导致的修改遗漏。
+
+
+### 用 Project Rule 定义代码规范
+
+Project Rule 不仅仅能定义工作流，还能定义代码规范。这也是更加传统的使用方式，这需要用到 `Auto Attach` 功能。他的描述是 
+
+When you specify file patters here (e.g.*.py or clienttsx),this rule will
+automatically be included in Al responses for files matching those patterns
+
+翻译过来就是：
+
+当您在此处指定文件模式（例如 *.py 或 clienttsx）时，此规则将自动包含在匹配这些模式的文件的 AI 响应中。
+
+比如说，我们新建一个组件文件的规范 component.mdc:
+
+```
+globs: src/components/*.tsx
+## 组件规范
+
+1. 需要在组件头部添加注释，描述组件功能
+2. 需要有 className 属性，传入根元素
+3. 使用 memo 包裹组件，避免不必要的渲染
+4. 添加了 displayName 属性，便于在 React 开发工具中识别组件
+```
+
+这样，我们在使用 Agent 的时候，假如引用的文件符合 globs 的规则，那么 AI 就会自动按照这个规则来执行。
+
+比如我们要求，优化组件代码，那么 AI 就会自动按照这个规则来优化代码。
+
+
+
+但是需要注意，必须是在引用文件匹配的情况下，AI 才会根据这个规则来执行。
+
+如果只是生成的文件符合 globs 的规则，那么 AI 不会自动按照这个规则来执行
+
+比如，我们要求修改 src/components/flower-card.tsx 文件，那么 AI 就会自动按照这个规则来执行。但是如果我们说，在 src/components 新增一个 xxx 组件，那么 AI 不会自动根据 globs 来匹配规范。
+
+> 通过测试，在 0.45 中， cursor 是能看到 globs 的规则的，但是 0.46 中， cursor 是看不到 globs 的规则的，所以导致了这个问题。不知道后续版本会不会优化这个问题。
+> 并且，在 0.46 中，即使我们在工作流中要求遵循某一个规范， 也大概率会被忽略掉，这也是 cursor 的 bug，希望后续版本会修复这个问题
+
+
+此时还是需要依靠 Description 来告诉 AI ，什么时候可以执行这个规则。所以我们需要在 Description 中告诉 AI ，这是一个通用组件规范。
+
+![project-rule-description.png](../../public/images/cursor-learning/project-rule-flow.png)
+
+## Agent 小结
+
+现在我们通过 Agent 模式，已经可以完成一个复杂的需求了，并且几乎不需要手动编写代码。
+我们用自然语言描述需求，AI 会自动生成代码，我们只需要进行 Review 和修改即可。
+在项目逐步增长之后，我们还可以通过 Project Rule 来定义常见工作流和代码规范，让 AI 按照我们定义的规则来快速完成通用任务。
+遇到复杂的需求，我们还可以通过 MCP 工具来调用外部工具，比如图片生成，视频生成，读取外部文件等。
+
+![image.png](../../public/images/cursor-learning/agent-workflow.png)
+
+![image.png](../../public/images/cursor-learning/agent-comparison.png)
+
+
+
+## 该使用哪款大模型
+
+根据 [Claude 3.7 Sonnet 的发布](https://www.anthropic.com/news/claude-3-7-sonnet)，Claude 3.7 Sonnet 在编码和前端网页开发方面表现出特别显著的改进。
+
+![image.png](../../public/images/cursor-learning/claude-3-7.png)
+
+- 在代码编辑方便，无脑选择 Claude 3.7 Sonnet
+- 在文字编码，特别是中文编码方面，还是可以选择 deepseek r1.

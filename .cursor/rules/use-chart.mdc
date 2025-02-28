@@ -1,5 +1,5 @@
 ---
-description: 当用户想要图例或者示意图时，遵循下面的规则
+description: 当用户想生成图例或者示意图（mermaid， canvs，svg）时，遵循下面的规则
 globs: 
 alwaysApply: false
 ---
