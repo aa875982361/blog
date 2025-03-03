@@ -1,1 +1,0 @@
-![alt text](../../sales_chart.png)
