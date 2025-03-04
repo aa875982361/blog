@@ -321,32 +321,17 @@ MCP ，全称 [Model Context Protocol](https://modelcontextprotocol.io/)，是 C
 
 可以看到，通过 MCP 工具，我们将不在局限于 Cursor 本身的能力，而是可以通过各种外部工具来辅助我们完成任务。
 
-我们可以在 [MCP 的 github 仓库](https://github.com/modelcontextprotocol/servers/tree/main) 找到关于 MCP 的很多官方例子，比如
+我们可以在 [MCP 的 github 仓库](https://github.com/modelcontextprotocol/servers/tree/main) 找到关于 MCP 的很多官方例子，同时也有很多人开源的 MCP 工具，比如 
 
+[Figma-Context-MCP](https://github.com/GLips/Figma-Context-MCP?tab=readme-ov-file)
 
-- AWS知识库检索 - 使用Bedrock Agent Runtime进行AWS知识库检索
-- Brave搜索 - 使用Brave的Search API进行网络和本地搜索
-- EverArt - 使用各种模型进行AI图像生成
-- Everything - 包含提示、资源和工具的参考/测试服务器
-- Fetch - 网页内容抓取和转换以提升LLM使用效率
-- Filesystem - 具有可配置访问控制的安全文件操作
-- Git - 提供Git仓库的读取、搜索和操作工具
-- GitHub - 仓库管理、文件操作和GitHub API集成
-- GitLab - 支持项目管理的GitLab API
-- Google云端硬盘 - Google Drive文件访问和搜索功能
-- Google地图 - 位置服务、路线导航和地点详情
-- Memory - 基于知识图谱的持久化记忆系统
-- PostgreSQL - 支持模式检查的只读数据库访问
-- Puppeteer - 浏览器自动化和网页抓取
-- Sentry - 从Sentry.io检索和分析问题
-- Sequential Thinking - 通过思维序列进行动态和反思性的问题解决
-- Slack - 频道管理和消息传递功能
-- Sqlite - 数据库交互和商业智能功能
-- Time - 时间和时区转换功能
+我开发的 MCP
+-  [VizForge](https://github.com/Acring/VizForge) : 在写作过程中利用 LLM 快速生成 图表
+- [ai-image-gen-mcp](https://github.com/Acring/ai-image-gen-mcp) : 利用 LLM 快速生成 图片
 
-当然，自己实现一个 MCP 工具并不是一件很难的事情，特别是在 AI 的帮助之下，比如这里的 AI 图片生成工具就是我自己实现的。我还同时实现了一个绘制各种示意图的 mcp 工具，来帮助我在写文档的时候绘制各种示意图。
+当然，自己实现一个 MCP 工具并不是一件很难的事情，特别是在 AI 的帮助之下，关键在于如何结合自己的业务场景，来实现一个适合自己的 MCP 工具。
 
-比如我想绘制一个流程图，我只需要在聊天框中输入：
+对于 VizForge 来说，我想绘制一个流程图，我只需要在聊天框中输入：
 
 ```
 帮我绘制一个流程图，展示和 AI 协作的流程
@@ -522,3 +507,8 @@ globs: src/components/*.tsx
 - 在文字编码，特别是中文编码方面，还是可以选择 deepseek r1.
 
 如果没有发现你想要的模型，可以在 `Cursor Settings` > `Model` 中查看所有支持的模型，并勾选你想要的模型。
+
+
+## 后续
+
+后续我还会继续探索 Cursor 的更多用法，特别是如何结合自己的业务场景，来使用 Cursor 来提升开发效率。以及哪些有用的 MCP 工具，来进一步提升 LLM 的能力。
