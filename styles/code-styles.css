@@ -1,0 +1,342 @@
+/* 代码块样式 */
+pre, code {
+  font-family: 'Fira Code', 'JetBrains Mono', 'Source Code Pro', 'Monaco', 'Menlo', 'Consolas', monospace;
+  font-size: 0.9em;
+  background-color: #f5f7f9;
+  border-radius: 4px;
+}
+
+/* 代码块容器 */
+pre {
+  padding: 1em;
+  border: 1px solid #e0e4e8;
+  overflow-x: auto;
+  line-height: 1.5;
+  margin: 1.5em 0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  page-break-inside: avoid; /* 防止代码块在页面中断 */
+  white-space: pre-wrap; /* 确保长代码行可以换行 */
+  word-wrap: break-word; /* 在必要时断词 */
+}
+
+/* 行内代码 */
+p code, li code, td code {
+  padding: 0.2em 0.4em;
+  border: 1px solid #e0e4e8;
+}
+
+/* 引用块样式 */
+blockquote {
+  margin: 1.5em 0;
+  padding: 1em 1.5em 1em 2em;
+  border-left: 4px solid #4e6ef2;
+  background-color: #f8f9fa;
+  position: relative;
+  border-radius: 0 4px 4px 0;
+  color: #444;
+  font-style: normal;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  page-break-inside: avoid; /* 防止引用块在页面中断 */
+}
+
+/* 引用块前的装饰引号 */
+blockquote:before {
+  content: "\201C"; /* Unicode 引号 */
+  font-family: Georgia, serif;
+  font-size: 3em;
+  position: absolute;
+  left: 10px;
+  top: -10px;
+  color: #4e6ef2;
+  opacity: 0.3;
+}
+
+/* 引用块内的段落 */
+blockquote p {
+  margin: 0.5em 0;
+  line-height: 1.6;
+}
+
+/* 引用块内的强调文本 */
+blockquote strong, blockquote b {
+  color: #333;
+  font-weight: 600;
+}
+
+/* 嵌套引用块的样式 */
+blockquote blockquote {
+  border-left-color: #ff6b6b;
+  background-color: #fff;
+  margin: 1em 0;
+}
+
+/* 注意类型的引用块 */
+blockquote.note {
+  border-left-color: #ffc107;
+  background-color: #fffbeb;
+  padding-left: 3.5em;
+}
+
+blockquote.note:before {
+  content: "📝";
+  font-size: 1.5em;
+  left: 1em;
+  top: 0.7em;
+  opacity: 1;
+}
+
+/* 警告类型的引用块 */
+blockquote.warning {
+  border-left-color: #ff5252;
+  background-color: #fff0f0;
+  padding-left: 3.5em;
+}
+
+blockquote.warning:before {
+  content: "⚠️";
+  font-size: 1.5em;
+  left: 1em;
+  top: 0.7em;
+  opacity: 1;
+}
+
+/* 提示类型的引用块 */
+blockquote.tip {
+  border-left-color: #42b983;
+  background-color: #f0fff7;
+  padding-left: 3.5em;
+}
+
+blockquote.tip:before {
+  content: "💡";
+  font-size: 1.5em;
+  left: 1em;
+  top: 0.7em;
+  opacity: 1;
+}
+
+/* 命令类型的引用块 */
+blockquote.command {
+  font-family: 'Fira Code', 'JetBrains Mono', 'Source Code Pro', 'Monaco', 'Menlo', 'Consolas', monospace;
+  background-color: #2d2d2d;
+  color: #f8f8f8;
+  border-left-color: #007acc;
+  padding-left: 3.5em;
+}
+
+blockquote.command:before {
+  content: ">";
+  color: #007acc;
+  font-family: 'Fira Code', 'JetBrains Mono', monospace;
+  font-size: 1.5em;
+  left: 1em;
+  top: 0.7em;
+  opacity: 1;
+}
+
+blockquote.command code {
+  background-color: #3a3a3a;
+  color: #f8f8f8;
+  border-color: #555;
+}
+
+/* 框式引用 - 特别适合像图片中展示的内容 */
+blockquote.box {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  border-left-width: 1px;
+  background-color: #fff;
+  padding: 1em;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+blockquote.box:before {
+  content: none;
+}
+
+/* 特殊标题样式 - 适用于引用块中需要强调的标题 */
+blockquote h4 {
+  margin-top: 0;
+  font-weight: 600;
+  color: #333;
+}
+
+blockquote.note h4 {
+  color: #b78105;
+}
+
+blockquote.warning h4 {
+  color: #c53030;
+}
+
+blockquote.tip h4 {
+  color: #2c7a57;
+}
+
+blockquote.command h4 {
+  color: #007acc;
+}
+
+/* 打印媒体查询中添加引用块样式 */
+@media print {
+  blockquote {
+    background-color: #f8f9fa !important;
+    border-left: 3pt solid #4e6ef2;
+    box-shadow: none;
+    padding: 0.8em 1.2em 0.8em 1.5em;
+    -webkit-print-color-adjust: exact;
+    color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  
+  blockquote:before {
+    font-size: 2.5em;
+    opacity: 0.2;
+  }
+  
+  blockquote.note, blockquote.warning, blockquote.tip, blockquote.command {
+    padding-left: 3em;
+  }
+  
+  blockquote.note:before, blockquote.warning:before, blockquote.tip:before, blockquote.command:before {
+    left: 0.8em;
+    top: 0.5em;
+  }
+  
+  blockquote.command {
+    background-color: #f0f0f0 !important;
+    color: #000 !important;
+  }
+  
+  blockquote.command code {
+    background-color: #e0e0e0 !important;
+    color: #000 !important;
+  }
+  
+  blockquote.box {
+    border: 1pt solid #ccc;
+    box-shadow: none;
+  }
+  
+  pre, code {
+    font-size: 0.85em; /* 打印时稍微减小字体大小 */
+  }
+  
+  pre {
+    border: 0.5pt solid #ccc; /* 打印时使用较细的边框 */
+    box-shadow: none; /* 移除打印中的阴影 */
+    background-color: #f8f8f8 !important; /* 确保背景颜色在打印时保留 */
+    -webkit-print-color-adjust: exact; /* 启用 WebKit 浏览器的颜色打印 */
+    color-adjust: exact; /* 标准方法启用颜色打印 */
+    print-color-adjust: exact; /* 未来规范的颜色打印 */
+  }
+  
+  .code-language {
+    border: 0.5pt solid #ccc; /* 打印时使用较细的边框 */
+  }
+}
+
+/* 代码块包装容器 */
+.code-block-wrapper {
+  position: relative;
+  margin: 1.5em 0;
+  page-break-inside: avoid; /* 防止代码块包装器在页面中断 */
+}
+
+/* 代码语言标签 */
+.code-language {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 0.2em 0.6em;
+  font-size: 0.85em;
+  font-weight: 500;
+  color: #444;
+  background-color: #e0e4e8;
+  border-radius: 0 4px 0 4px;
+  z-index: 1;
+}
+
+/* 代码高亮 */
+.hljs-keyword {
+  color: #0076c6;
+  font-weight: bold;
+}
+
+.hljs-string {
+  color: #42b983;
+}
+
+.hljs-comment {
+  color: #999999;
+  font-style: italic;
+}
+
+.hljs-number {
+  color: #c76b29;
+}
+
+.hljs-function {
+  color: #6f42c1;
+}
+
+.hljs-class {
+  color: #e36209;
+}
+
+.hljs-variable {
+  color: #24292e;
+}
+
+.hljs-built_in {
+  color: #d73a49;
+}
+
+.hljs-operator {
+  color: #005cc5;
+}
+
+.hljs-title {
+  color: #6f42c1;
+  font-weight: bold;
+}
+
+.hljs-params {
+  color: #24292e;
+}
+
+.hljs-attr {
+  color: #005cc5;
+}
+
+.hljs-name {
+  color: #22863a;
+}
+
+.hljs-tag {
+  color: #22863a;
+}
+
+.hljs-punctuation {
+  color: #24292e;
+}
+
+.hljs-section {
+  color: #005cc5;
+  font-weight: bold;
+}
+
+.hljs-attribute {
+  color: #005cc5;
+}
+
+/* 代码行号样式 */
+.hljs-line-numbers {
+  color: #999;
+  border-right: 1px solid #e0e4e8;
+  padding-right: 0.8em;
+  margin-right: 0.8em;
+  text-align: right;
+  -webkit-user-select: none;
+  user-select: none;
+} 

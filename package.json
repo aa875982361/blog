@@ -3,16 +3,23 @@
   "version": "1.0.0",
   "main": "index.js",
   "directories": {
-    "doc": "doc"
+    "doc": "doc",
+    "publish": "markdown-pdf"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "node scripts/build.mjs",
+    "try": "node ./markdown-to-pdf.mjs"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "highlight.js": "^11.11.1",
     "markdown-pdf": "^11.0.0"
+  },
+  "devDependencies": {
+    "phantomjs-prebuilt": "^2.1.16"
   }
 }
